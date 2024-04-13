@@ -11,12 +11,15 @@ const protect = asyncHandler(async (req, res, next) => {
   ) {
     try {
       // Get token from header
+      // The token is gonna be of the form bearer token
       token = req.headers.authorization.split(' ')[1]
 
       // Verify token
       const decoded = jwt.verify(token, process.env.JWT_SECRET)
 
       // Get user from the token
+      // We can get back the id because we added it while we were creating the jwt
+      // This wont include the password though it would be hashed
       req.user = await User.findById(decoded.id).select('-password')
 
       next()

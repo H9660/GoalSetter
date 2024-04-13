@@ -47,6 +47,7 @@ const updateGoal = asyncHandler(async (req, res) => {
   }
 
   // Make sure the logged in user matches the goal user
+  // only the auth person can update the goals and do other operations
   if (goal.user.toString() !== req.user.id) {
     res.status(401)
     throw new Error('User not authorized')
@@ -69,7 +70,7 @@ const deleteGoal = asyncHandler(async (req, res) => {
     res.status(400)
     throw new Error('Goal not found')
   }
-
+ 
   // Check for user
   if (!req.user) {
     res.status(401)

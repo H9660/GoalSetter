@@ -43,6 +43,7 @@ function Register() {
   }
 
   const onSubmit = (e) => {
+    // This is done to prevent automatically page reloading
     e.preventDefault()
 
     if (password !== password2) {
